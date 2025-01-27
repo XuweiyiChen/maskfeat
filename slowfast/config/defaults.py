@@ -607,6 +607,13 @@ _C.MASK.DECODER_DEPTH = 0
 
 # The weight of HOG target loss.
 _C.MASK.PRED_HOG = False
+
+# The weight of pixel loss.
+_C.MASK.PRED_PIXEL_WT = 0.0
+
+# The weight of HOG loss
+_C.MASK.PRED_HOG_WT = 1.0
+
 # Reversible Configs
 _C.MVIT.REV = CfgNode()
 

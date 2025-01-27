@@ -69,6 +69,15 @@ class MaskMViT(MViT):
                     self.blocks, cfg, pred_hog_classes, feat_sz
                 )
                 self.hog_loss = "mse"
+
+            # Add the pixel-level prediction head
+            pixel_num_classes = [
+                (self.feat_stride[depth][-1] ** 2) * 3  # RGB per pixel
+                for depth in self.pretrain_depth
+            ]
+            self.pixel_pred_head = head_helper.MSSeparateHead(
+                self.blocks, cfg, pixel_num_classes, feat_sz
+            )
         else:
             raise NotImplementedError
 
@@ -123,9 +132,8 @@ class MaskMViT(MViT):
 
         if cfg.MASK.SCALE_INIT_BY_DEPTH:
             self.fix_init_weight()
-
-        self.pred_pixel_wt = 0.0 if cfg.MASK.PRED_HOG else 1.0
-        self.pred_hog_wt = 1.0 if cfg.MASK.PRED_HOG else 0.0
+        self.pred_pixel_wt = cfg.MASK.PRED_PIXEL_WT
+        self.pred_hog_wt = cfg.MASK.PRED_HOG_WT
 
     @torch.jit.ignore
     def no_weight_decay(self):
@@ -207,7 +215,7 @@ class MaskMViT(MViT):
                 mean = label.mean(dim=-1, keepdim=True)
                 var = label.var(dim=-1, keepdim=True)
                 label = (label - mean) / (var + 1.0e-6) ** 0.5
-            labels.append(label)
+            labels.append((label, self.pred_pixel_wt, self.hog_loss))
         return labels
 
     def _get_pixel_label_3d(
@@ -529,7 +537,8 @@ class MaskMViT(MViT):
             float_mask = mask.type_as(x)
             output_masks = self._get_multiscale_mask(float_mask)
         labels = []
-        if self.pred_pixel_wt:
+        if self.pred_pixel_wt > 0.1:
+
             if self.use_2d_patch:
                 labels += self._get_pixel_label_2d(
                     x.detach(), output_masks, norm=self.cfg.MASK.NORM_PRED_PIXEL
@@ -538,7 +547,8 @@ class MaskMViT(MViT):
                 labels += self._get_pixel_label_3d(
                     x.detach(), output_masks, norm=self.cfg.MASK.NORM_PRED_PIXEL
                 )
-        if self.pred_hog_wt:
+        if self.pred_hog_wt > 0.1:
+
             if self.use_2d_patch:
                 labels += self._get_hog_label_2d(x.detach(), output_masks)
             else:
@@ -593,15 +603,16 @@ class MaskMViT(MViT):
                 block_outputs.append(x)
 
         model_outputs = []
-        if self.pred_pixel_wt:
-            pixel_outputs = self.pred_head(
+        if self.pred_pixel_wt > 0.1:
+            pixel_outputs = self.pixel_pred_head(
                 block_outputs,
                 output_masks,
                 return_all=return_all,
                 thw=thw,
             )
             model_outputs += pixel_outputs
-        if self.pred_hog_wt:
+
+        if self.pred_hog_wt > 0.1:
             hog_outputs = self.pred_head(
                 block_outputs,
                 output_masks,
@@ -621,4 +632,5 @@ class MaskMViT(MViT):
         if self.cfg.MASK.MAE_ON:
             return self._mae_forward(x, mask_ratio=self.cfg.AUG.MASK_RATIO, mask=mask)
         else:
+
             return self._maskfeat_forward(x, mask, return_all)

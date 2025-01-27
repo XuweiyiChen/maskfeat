@@ -1,0 +1,7 @@
+checkpoints
+env
+*.log
+experiments
+__pycache__
+build
+*.egg-info

@@ -13,7 +13,7 @@ TORCH_MINOR = int(torch.__version__.split(".")[1])
 if TORCH_MAJOR >= 1 and TORCH_MINOR >= 8:
     _int_classes = int
 else:
-    from torch._six import int_classes as _int_classes
+    _int_classes = int
 
 
 class ShortCycleBatchSampler(Sampler):
@@ -40,9 +40,8 @@ class ShortCycleBatchSampler(Sampler):
             )
         if not isinstance(drop_last, bool):
             raise ValueError(
-                "drop_last should be a boolean value, but got " "drop_last={}".format(
-                    drop_last
-                )
+                "drop_last should be a boolean value, but got "
+                "drop_last={}".format(drop_last)
             )
         self.sampler = sampler
         self.drop_last = drop_last

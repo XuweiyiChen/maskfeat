@@ -576,7 +576,7 @@ def train(cfg):
 
     # Create the video train and val loaders.
     train_loader = loader.construct_loader(cfg, "train")
-    val_loader = loader.construct_loader(cfg, "val")
+    val_loader = loader.construct_loader(cfg, "validation")
     precise_bn_loader = (
         loader.construct_loader(cfg, "train", is_precise_bn=True)
         if cfg.BN.USE_PRECISE_STATS
@@ -596,7 +596,7 @@ def train(cfg):
     # Create meters.
     if cfg.DETECTION.ENABLE:
         train_meter = AVAMeter(len(train_loader), cfg, mode="train")
-        val_meter = AVAMeter(len(val_loader), cfg, mode="val")
+        val_meter = AVAMeter(len(val_loader), cfg, mode="validation")
     else:
         train_meter = TrainMeter(len(train_loader), cfg)
         val_meter = ValMeter(len(val_loader), cfg)
