@@ -1,0 +1,7 @@
+/sfs/gpfs/tardis/project/uva_cv_lab/xuweic/SlowFast/tools/train_net.py:530: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=cfg.TRAIN.MIXED_PRECISION)
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 20407.32it/s]
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 9045.18it/s]
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 9048.63it/s]
+/sfs/gpfs/tardis/project/uva_cv_lab/xuweic/SlowFast/tools/train_net.py:114: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=cfg.TRAIN.MIXED_PRECISION):

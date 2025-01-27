@@ -1,0 +1,20 @@
+/sfs/gpfs/tardis/project/uva_cv_lab/xuweic/SlowFast/tools/train_net.py:530: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=cfg.TRAIN.MIXED_PRECISION)
+/sfs/gpfs/tardis/project/uva_cv_lab/xuweic/SlowFast/tools/train_net.py:530: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=cfg.TRAIN.MIXED_PRECISION)
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 38815.01it/s]
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 35993.52it/s]
+Using custom data configuration imagenet-100-6fc9e84130baf01f
+Reusing dataset parquet (/project/uva_cv_lab/xuweic/huggingface/parquet/imagenet-100-6fc9e84130baf01f/0.0.0/0b6d5799bb726b24ad7fc7be720c170d8e497f575d02d47537de9a5bac074901)
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 20262.34it/s]
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 23555.72it/s]
+Using custom data configuration imagenet-100-6fc9e84130baf01f
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 35993.52it/s]
+Reusing dataset parquet (/project/uva_cv_lab/xuweic/huggingface/parquet/imagenet-100-6fc9e84130baf01f/0.0.0/0b6d5799bb726b24ad7fc7be720c170d8e497f575d02d47537de9a5bac074901)
+Resolving data files:   0%|          | 0/17 [00:00<?, ?it/s]Resolving data files: 100%|██████████| 17/17 [00:00<00:00, 21528.73it/s]
+Using custom data configuration imagenet-100-6fc9e84130baf01f
+Reusing dataset parquet (/project/uva_cv_lab/xuweic/huggingface/parquet/imagenet-100-6fc9e84130baf01f/0.0.0/0b6d5799bb726b24ad7fc7be720c170d8e497f575d02d47537de9a5bac074901)
+/sfs/gpfs/tardis/project/uva_cv_lab/xuweic/SlowFast/tools/train_net.py:114: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=cfg.TRAIN.MIXED_PRECISION):
+/sfs/gpfs/tardis/project/uva_cv_lab/xuweic/SlowFast/tools/train_net.py:114: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=cfg.TRAIN.MIXED_PRECISION):

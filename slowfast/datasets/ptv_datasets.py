@@ -18,7 +18,7 @@ from pytorchvideo.transforms import (
 )
 from torch.utils.data import DistributedSampler, RandomSampler, SequentialSampler
 from torchvision.transforms import Compose, Lambda
-from torchvision.transforms._transforms_video import (
+from  import (
     NormalizeVideo,
     RandomCropVideo,
     RandomHorizontalFlipVideo,

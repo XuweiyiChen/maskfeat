@@ -2,7 +2,7 @@ TASK: ssl
 TRAIN:
   ENABLE: True
   DATASET: imagenet
-  BATCH_SIZE: 640
+  BATCH_SIZE: 256
   EVAL_PERIOD: 10000
   CHECKPOINT_PERIOD: 10
   AUTO_RESUME: True
@@ -39,8 +39,8 @@ MASK:
   PRETRAIN_DEPTH: [11]
   HEAD_TYPE: "separate"
   PRED_HOG: True
-  PRED_PIXEL_WT: 0.2
-  PRED_HOG_WT: 0.8
+  PRED_PIXEL_WT: 1.0
+  PRED_HOG_WT: 0.0
 AUG:
   ENABLE: True
   RE_PROB: 0.0
@@ -79,5 +79,5 @@ DATA_LOADER:
 NUM_GPUS: 2
 NUM_SHARDS: 1
 RNG_SEED: 0
-OUTPUT_DIR: experiments/experiments-1-dev
+OUTPUT_DIR: experiments/experiments-6-pixel=1-HOG=0
 LOG_MODEL_INFO: False
